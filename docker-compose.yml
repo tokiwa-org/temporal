@@ -1,0 +1,144 @@
+services:
+  # PostgreSQL - データベース
+  postgresql:
+    container_name: temporal-postgresql
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_PASSWORD: temporal
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - temporal-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U temporal"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Temporal Server
+  temporal:
+    container_name: temporal
+    image: temporalio/auto-setup:latest
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      - DB=postgres12
+      - DB_PORT=5432
+      - POSTGRES_USER=temporal
+      - POSTGRES_PWD=temporal
+      - POSTGRES_SEEDS=postgresql
+      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
+    ports:
+      - "7233:7233"
+    volumes:
+      - ./dynamicconfig:/etc/temporal/config/dynamicconfig
+    networks:
+      - temporal-network
+    healthcheck:
+      test: ["CMD", "tctl", "--address", "temporal:7233", "cluster", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # Temporal Web UI
+  temporal-ui:
+    container_name: temporal-ui
+    image: temporalio/ui:latest
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+    ports:
+      - "8080:8080"
+    networks:
+      - temporal-network
+
+  # Temporal Admin Tools (オプション)
+  temporal-admin-tools:
+    container_name: temporal-admin-tools
+    image: temporalio/admin-tools:latest
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+    stdin_open: true
+    tty: true
+    networks:
+      - temporal-network
+
+  # ===== アプリケーション =====
+
+  # Temporal Worker
+  worker:
+    container_name: leave-request-worker
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    command: ["node", "dist/temporal/worker.js"]
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+    networks:
+      - temporal-network
+    restart: unless-stopped
+
+  # API Server
+  api:
+    container_name: leave-request-api
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    command: ["node", "dist/api/server.js"]
+    depends_on:
+      temporal:
+        condition: service_healthy
+      worker:
+        condition: service_started
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - PORT=3001
+    networks:
+      - temporal-network
+    restart: unless-stopped
+
+  # Web Frontend
+  web:
+    container_name: leave-request-web
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    networks:
+      - temporal-network
+    restart: unless-stopped
+
+  # Gateway (nginx reverse proxy)
+  gateway:
+    container_name: leave-request-gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+      - web
+    ports:
+      - "3000:80"
+    networks:
+      - temporal-network
+    restart: unless-stopped
+
+networks:
+  temporal-network:
+    driver: bridge
+
+volumes:
+  postgresql-data:

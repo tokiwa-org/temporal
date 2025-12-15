@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   Base Styles
+   ============================================ */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+}
+
+/* ============================================
+   Components - Buttons
+   ============================================ */
+@layer components {
+  /* Primary Button (Blue) */
+  .btn-primary {
+    @apply px-6 py-2 bg-blue-600 text-white rounded-lg
+           hover:bg-blue-700 disabled:opacity-50 font-medium;
+  }
+
+  /* Secondary Button (Gray outline) */
+  .btn-secondary {
+    @apply px-6 py-2 border rounded-lg hover:bg-gray-50;
+  }
+
+  /* Ghost Button (Text only) */
+  .btn-ghost {
+    @apply px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm;
+  }
+
+  /* Success Button (Green) */
+  .btn-success {
+    @apply flex-1 px-6 py-3 bg-green-600 text-white rounded-lg
+           hover:bg-green-700 disabled:opacity-50 font-medium;
+  }
+
+  /* Danger Button (Red) */
+  .btn-danger {
+    @apply flex-1 px-6 py-3 bg-red-600 text-white rounded-lg
+           hover:bg-red-700 disabled:opacity-50 font-medium;
+  }
+
+  /* ============================================
+     Components - Form Elements
+     ============================================ */
+  /* Text Input / Select / Date */
+  .form-input {
+    @apply w-full px-4 py-2 border rounded-lg
+           focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  }
+
+  /* Form Label */
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-2;
+  }
+
+  /* ============================================
+     Components - Status Badges
+     ============================================ */
+  .badge {
+    @apply px-2 py-1 rounded text-sm;
+  }
+
+  .badge-pending {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
+  .badge-approved {
+    @apply bg-green-100 text-green-800;
+  }
+
+  .badge-rejected {
+    @apply bg-red-100 text-red-800;
+  }
+
+  .badge-timeout {
+    @apply bg-gray-100 text-gray-800;
+  }
+
+  .badge-cancelled {
+    @apply bg-orange-100 text-orange-800;
+  }
+
+  /* Status Header (with border) */
+  .status-header-pending {
+    @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+  }
+
+  .status-header-approved {
+    @apply bg-green-100 text-green-800 border-green-200;
+  }
+
+  .status-header-rejected {
+    @apply bg-red-100 text-red-800 border-red-200;
+  }
+
+  .status-header-timeout {
+    @apply bg-gray-100 text-gray-800 border-gray-200;
+  }
+
+  .status-header-cancelled {
+    @apply bg-orange-100 text-orange-800 border-orange-200;
+  }
+
+  /* ============================================
+     Components - Cards
+     ============================================ */
+  .card {
+    @apply bg-white rounded-lg shadow p-6;
+  }
+
+  .card-hover {
+    @apply bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow;
+  }
+
+  /* ============================================
+     Components - Typography
+     ============================================ */
+  .page-title {
+    @apply text-2xl font-bold text-gray-800;
+  }
+
+  .section-label {
+    @apply text-sm font-medium text-gray-500 mb-1;
+  }
+
+  /* ============================================
+     Components - Alerts
+     ============================================ */
+  .alert-error {
+    @apply bg-red-50 text-red-600 p-4 rounded-lg;
+  }
+
+  /* ============================================
+     Components - Loading
+     ============================================ */
+  .spinner {
+    @apply animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full;
+  }
+
+  /* ============================================
+     Components - Links
+     ============================================ */
+  .link {
+    @apply text-blue-600 hover:underline;
+  }
+
+  .link-back {
+    @apply text-gray-500 hover:text-gray-700;
+  }
+
+  .link-retry {
+    @apply ml-4 text-red-700 underline hover:no-underline;
+  }
+}

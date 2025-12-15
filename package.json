@@ -1,0 +1,44 @@
+{
+  "name": "leave-request-app",
+  "version": "1.0.0",
+  "description": "Temporal workflow for leave request approval",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start:worker": "ts-node server/temporal/worker.ts",
+    "start:api": "ts-node server/api/server.ts",
+    "dev:web": "vite --config web/vite.config.ts",
+    "build:web": "vite build --config web/vite.config.ts",
+    "dev": "concurrently \"npm run start:worker\" \"npm run start:api\" \"npm run dev:web\"",
+    "submit": "ts-node server/client.ts submit",
+    "approve": "ts-node server/client.ts approve",
+    "reject": "ts-node server/client.ts reject",
+    "status": "ts-node server/client.ts status"
+  },
+  "dependencies": {
+    "@temporalio/activity": "^1.11.6",
+    "@temporalio/client": "^1.11.6",
+    "@temporalio/worker": "^1.11.6",
+    "@temporalio/workflow": "^1.11.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@tanstack/react-router": "^1.82.1",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.4.32",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.10"
+  }
+}
