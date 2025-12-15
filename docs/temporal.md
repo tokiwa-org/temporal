@@ -53,6 +53,7 @@ Temporalは**ワークフローオーケストレーションプラットフォ�
 <div style="background-color: white; padding: 16px; border-radius: 8px;">
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#333333', 'lineColor': '#333333', 'secondaryColor': '#f0f0f0', 'tertiaryColor': '#f0f0f0', 'noteBkgColor': '#ffffff', 'noteTextColor': '#000000'}}}%%
 flowchart TB
     subgraph Browser["ブラウザ"]
         UI[React App]
@@ -92,6 +93,7 @@ flowchart TB
 <div style="background-color: white; padding: 16px; border-radius: 8px;">
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#333333', 'lineColor': '#333333', 'actorBkg': '#ffffff', 'actorTextColor': '#000000', 'actorLineColor': '#333333', 'signalColor': '#333333', 'signalTextColor': '#000000'}}}%%
 sequenceDiagram
     participant U as ユーザー
     participant A as API
@@ -569,6 +571,7 @@ export function createLeaveRequestRoutes(service: LeaveRequestService): Router {
 <div style="background-color: white; padding: 16px; border-radius: 8px;">
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#333333', 'lineColor': '#333333', 'secondaryColor': '#f0f0f0', 'tertiaryColor': '#f0f0f0'}}}%%
 flowchart TD
     A[申請提出] --> B[承認者に通知]
     B --> C{承認待ち}
@@ -592,6 +595,7 @@ flowchart TD
 <div style="background-color: white; padding: 16px; border-radius: 8px;">
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#333333', 'lineColor': '#333333'}}}%%
 stateDiagram-v2
     [*] --> pending : 申請作成
     pending --> approved : 承認Signal
