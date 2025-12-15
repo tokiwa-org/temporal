@@ -51,7 +51,7 @@ Temporalは**ワークフローオーケストレーションプラットフォ�
 ### 全体構成
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f0f0f0', 'primaryTextColor': '#000', 'primaryBorderColor': '#333', 'lineColor': '#333', 'secondaryColor': '#fff', 'tertiaryColor': '#fff', 'background': '#fff'}}}%%
+%%{init: {'theme': 'default'}}%%
 flowchart TB
     subgraph Browser["ブラウザ"]
         UI[React App]
@@ -87,7 +87,7 @@ flowchart TB
 ### データフロー
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f0f0f0', 'primaryTextColor': '#000', 'primaryBorderColor': '#333', 'lineColor': '#333', 'secondaryColor': '#fff', 'tertiaryColor': '#fff', 'background': '#fff'}}}%%
+%%{init: {'theme': 'default'}}%%
 sequenceDiagram
     participant U as ユーザー
     participant A as API
@@ -561,7 +561,7 @@ export function createLeaveRequestRoutes(service: LeaveRequestService): Router {
 ### フローチャート
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f0f0f0', 'primaryTextColor': '#000', 'primaryBorderColor': '#333', 'lineColor': '#333', 'secondaryColor': '#fff', 'tertiaryColor': '#fff', 'background': '#fff'}}}%%
+%%{init: {'theme': 'default'}}%%
 flowchart TD
     A[申請提出] --> B[承認者に通知]
     B --> C{承認待ち}
@@ -581,7 +581,7 @@ flowchart TD
 ### ステータス遷移図
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f0f0f0', 'primaryTextColor': '#000', 'primaryBorderColor': '#333', 'lineColor': '#333', 'secondaryColor': '#fff', 'tertiaryColor': '#fff', 'background': '#fff'}}}%%
+%%{init: {'theme': 'default'}}%%
 stateDiagram-v2
     [*] --> pending : 申請作成
     pending --> approved : 承認Signal
