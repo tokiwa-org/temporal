@@ -50,8 +50,9 @@ Temporalは**ワークフローオーケストレーションプラットフォ�
 
 ### 全体構成
 
+<div style="background-color: white; padding: 16px; border-radius: 8px;">
+
 ```mermaid
-%%{init: {'theme': 'default'}}%%
 flowchart TB
     subgraph Browser["ブラウザ"]
         UI[React App]
@@ -84,10 +85,13 @@ flowchart TB
     WF --> ACT
 ```
 
+</div>
+
 ### データフロー
 
+<div style="background-color: white; padding: 16px; border-radius: 8px;">
+
 ```mermaid
-%%{init: {'theme': 'default'}}%%
 sequenceDiagram
     participant U as ユーザー
     participant A as API
@@ -111,6 +115,8 @@ sequenceDiagram
     WF->>WF: notifyEmployee()
     WF-->>T: 完了
 ```
+
+</div>
 
 ### プロジェクト構造
 
@@ -560,8 +566,9 @@ export function createLeaveRequestRoutes(service: LeaveRequestService): Router {
 
 ### フローチャート
 
+<div style="background-color: white; padding: 16px; border-radius: 8px;">
+
 ```mermaid
-%%{init: {'theme': 'default'}}%%
 flowchart TD
     A[申請提出] --> B[承認者に通知]
     B --> C{承認待ち}
@@ -578,10 +585,13 @@ flowchart TD
     I --> J[完了]
 ```
 
+</div>
+
 ### ステータス遷移図
 
+<div style="background-color: white; padding: 16px; border-radius: 8px;">
+
 ```mermaid
-%%{init: {'theme': 'default'}}%%
 stateDiagram-v2
     [*] --> pending : 申請作成
     pending --> approved : 承認Signal
@@ -593,6 +603,8 @@ stateDiagram-v2
     cancelled --> [*]
     timeout --> [*]
 ```
+
+</div>
 
 ---
 
